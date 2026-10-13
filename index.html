@@ -163,7 +163,7 @@
     top: 0;
     height: fit-content;
     max-height: 100vh;
-    overflow-y: visible;
+    overflow-y: auto; /* 修正为 auto，允许内容过长时滚动 */
   }
 
   .sidebar-header {
@@ -1048,8 +1048,8 @@
     }
   }
 </style>
-<!-- 引入不蒜子统计脚本 -->
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- 引入 oneline.js 用于实时在线人数统计 -->
+<script src="https://cdn.jsdelivr.net/gh/ezshine/oneline.js@1.0.0/oneline.js"></script>
 </head>
 <body>
 <!-- 背景声波星轨线条 -->
@@ -1069,11 +1069,11 @@
 <span class="site-pill-glow"></span>
 <span data-i18n="badge">STAGE GUIDE · 阶段指南</span>
 </div>
-<!-- 访问量计数器，已按截图位置移动到标题右侧 -->
-<div class="visitor-badge" title="总访问量">
+<!-- 实时在线人数统计 -->
+<div class="visitor-badge" title="当前在线人数">
     <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-    <span data-i18n="visitor_label">访客:</span>
-    <span id="busuanzi_value_site_pv" class="count">--</span>
+    <span data-i18n="visitor_label">在线:</span>
+    <span id="online-count" class="count">--</span>
 </div>
 <div aria-label="Language Selector" class="lang-switcher" role="navigation">
 <button class="active" id="btn-zh" onclick="setLanguage('zh')">中文</button>
@@ -1488,7 +1488,7 @@
       link10_title: "关于本站作者 · 晴れ猫🏳️‍⚧️🍥",
       link10_desc: "clipsule.github.io · 本站作者的个人简介与版权声明",
       sec_contributors: "贡献者",
-      visitor_label: "访客",
+      visitor_label: "在线:", // 修改为“在线”
       contributor_mkpoli: "代码贡献 / 项目支持",
       contributor_clipsule: "创作者 / 所有者",
       note_strong: "版权与声明：",
@@ -1568,7 +1568,7 @@
       link10_title: "About the Author · 晴れ猫🏳️‍⚧️🍥",
       link10_desc: "clipsule.github.io · Author's personal profile and copyright notice",
       sec_contributors: "Contributors",
-      visitor_label: "Visitors",
+      visitor_label: "Online:", // 修改为 Online
       contributor_mkpoli: "Code Contribution & Support",
       contributor_clipsule: "Creator & Owner",
       note_strong: "Copyright & Disclaimer: ",
@@ -1646,7 +1646,7 @@
       link10_title: "このサイトの作者について · 晴れ猫🏳️‍⚧️🍥",
       link10_desc: "clipsule.github.io · 作者のプロフィールと著作権表示",
       sec_contributors: "貢献者",
-      visitor_label: "訪問者",
+      visitor_label: "オンライン:", // 修改为 オンライン
       contributor_mkpoli: "コード貢献・サポート",
       contributor_clipsule: "作成者・所有者",
       note_strong: "著作権と免責事項：",
@@ -1724,7 +1724,7 @@
       link10_title: "사이트 작성자 소개 · 晴れ猫🏳️‍⚧️🍥",
       link10_desc: "clipsule.github.io · 작성자 프로필 및 저작권 고지",
       sec_contributors: "기여자",
-      visitor_label: "방문자",
+      visitor_label: "온라인:", // 修改为 온라인
       contributor_mkpoli: "코드 기여 및 지원",
       contributor_clipsule: "제작자 및 소유자",
       note_strong: "저작권 및 면책 조항: ",
@@ -1786,6 +1786,18 @@
       else if (browserLang.startsWith('ko')) setLanguage('ko');
       else if (browserLang.startsWith('en')) setLanguage('en');
       else setLanguage('zh');
+    }
+
+    // 初始化 Oneline 实时在线人数统计
+    if (typeof Oneline !== 'undefined') {
+        new Oneline("mtf-voice-training-online-v1").on("OnelineUpdate", (e) => {
+            const countEl = document.getElementById('online-count');
+            if (countEl) {
+                countEl.textContent = e.detail.count;
+            }
+        });
+    } else {
+        console.warn("Oneline.js 未加载，无法显示实时在线人数。");
     }
 
     // 返回顶部按钮逻辑
