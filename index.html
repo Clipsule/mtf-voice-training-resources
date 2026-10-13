@@ -1,30 +1,50 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>MTF 声音女性化训练资源</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+SC:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
+  a { 
+      text-decoration: none;
+    }
+
   :root {
-    --text: #2c2c34;
-    --muted: #8a8a99;
-    --accent: #d9779f;
-    --accent2: #6f95dd;
-    --card: rgba(255, 255, 255, 0.93);
-    --line: #ececf4;
+    --text-primary: #191c2b;
+    --text-secondary: #525872;
+    --text-muted: #888ea6;
+    --accent-pink: #d9779f;
+    --accent-pink-soft: #ffe4ef;
+    --accent-pink-vibrant: #ff6ea7;
+    --accent-blue: #5884d6;
+    --accent-blue-soft: #dbe8ff;
+    --accent-lavender: #ece5ff;
+    --accent-peach: #fff3e6;
+    --accent-gradient: linear-gradient(135deg, #d9779f 0%, #a285e1 52%, #5884d6 100%);
+    --nebula-glow: linear-gradient(135deg, rgba(217, 119, 159, 0.16) 0%, rgba(162, 133, 225, 0.14) 50%, rgba(88, 132, 214, 0.16) 100%);
+    --card-bg: rgba(255, 255, 255, 0.88);
+    --card-glass: rgba(255, 255, 255, 0.72);
+    --line: rgba(225, 230, 246, 0.85);
+    --line-glow: rgba(217, 119, 159, 0.3);
+    --shadow-soft: 0 16px 36px -12px rgba(88, 102, 160, 0.1), 0 4px 14px -4px rgba(88, 102, 160, 0.05);
+    --shadow-elevated: 0 24px 50px -12px rgba(115, 126, 185, 0.2), 0 8px 24px -6px rgba(217, 119, 159, 0.12);
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-                 "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
-    color: var(--text);
-    line-height: 1.75;
+    font-family: "Plus Jakarta Sans", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    color: var(--text-primary);
+    line-height: 1.65;
     min-height: 100vh;
-    padding: 56px 20px 72px;
+    padding: 32px 24px;
     display: flex;
     justify-content: center;
     -webkit-font-smoothing: antialiased;
@@ -33,234 +53,992 @@
     overflow-x: hidden;
   }
 
-  /* 柔和渐变背景 */
+  /* 梦幻声波星轨与四向弥散背景 */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: -2;
     background:
-      radial-gradient(820px 620px at -5% -10%, #ffe2ee 0%, rgba(255, 226, 238, 0) 62%),
-      radial-gradient(900px 700px at 105% 0%, #dbe8ff 0%, rgba(219, 232, 255, 0) 60%),
-      radial-gradient(760px 560px at 50% 110%, #ece5ff 0%, rgba(236, 229, 255, 0) 65%),
+      radial-gradient(1000px 750px at -5% -10%, #ffe2ee 0%, rgba(255, 226, 238, 0) 65%),
+      radial-gradient(1100px 850px at 105% 0%, #dbe8ff 0%, rgba(219, 232, 255, 0) 62%),
+      radial-gradient(900px 700px at 50% 110%, #ece5ff 0%, rgba(236, 229, 255, 0) 65%),
+      radial-gradient(750px 500px at 50% -8%, #fff3e6 0%, rgba(255, 243, 230, 0) 60%),
       #f8f9fd;
   }
 
-  .card {
-    width: 100%;
-    max-width: 740px;
-    background: var(--card);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    border-radius: 26px;
-    padding: 52px 56px 56px;
-    box-shadow:
-      0 24px 60px -26px rgba(88, 96, 148, 0.28),
-      0 4px 18px -10px rgba(88, 96, 148, 0.14);
-    animation: rise 0.55s cubic-bezier(0.22, 0.8, 0.3, 1) both;
-    position: relative;
+  /* 浮动星轨微尘粒子 */
+  .cosmic-orbits {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
   }
-
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ---------- 语言切换器 ---------- */
-  .lang-switcher {
+  .orbit-ring {
     position: absolute;
-    top: 24px;
-    right: 28px;
-    display: flex;
-    gap: 6px;
-    font-size: 12px;
+    border-radius: 50%;
+    border: 1px dashed rgba(162, 133, 225, 0.22);
+    animation: rotateOrbit 90s linear infinite;
   }
-  .lang-switcher button {
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 4px 10px;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: inherit;
+  .orbit-ring-1 {
+    width: 680px; height: 680px;
+    top: -160px; right: -120px;
+    border-color: rgba(88, 132, 214, 0.18);
   }
-  .lang-switcher button:hover {
-    background: #fff;
-    color: var(--accent);
-    border-color: #ded4ee;
-  }
-  .lang-switcher button.active {
-    background: var(--accent2);
-    color: #fff;
-    border-color: var(--accent2);
+  .orbit-ring-2 {
+    width: 950px; height: 950px;
+    bottom: -280px; left: -200px;
+    border-color: rgba(217, 119, 159, 0.18);
+    animation-direction: reverse;
+    animation-duration: 130s;
   }
 
-  /* ---------- 头部 ---------- */
-  .badge {
+  @keyframes rotateOrbit {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* 声波工作台主壳容器 */
+  .dashboard-shell {
+    width: 100%;
+    max-width: 1380px;
+    background: var(--card-bg);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    border-radius: 36px;
+    overflow: hidden;
+    box-shadow:
+      0 36px 90px -26px rgba(80, 92, 150, 0.22),
+      0 12px 30px -10px rgba(80, 92, 150, 0.08),
+      inset 0 1px 1px rgba(255, 255, 255, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(18px) scale(0.995); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* 顶部动态声谱光带 */
+  .top-spectrum-bar {
+    height: 6px;
+    width: 100%;
+    background: linear-gradient(90deg, #ffb0cb 0%, #d9779f 25%, #a285e1 50%, #5884d6 75%, #8ecbf7 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .top-spectrum-bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+    animation: scanSweep 3.6s infinite ease-in-out;
+  }
+  @keyframes scanSweep {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  /* 双栏布局 */
+  .layout-grid {
+    display: grid;
+    grid-template-columns: 430px 1fr;
+    min-height: calc(100vh - 70px);
+  }
+
+  /* 左侧：声学控制台常驻侧栏 */
+  .guide-sidebar {
+    padding: 44px 38px 48px;
+    border-right: 1px solid var(--line);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(250, 252, 255, 0.88) 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: sticky;
+    top: 0;
+    height: fit-content;
+    max-height: 100vh;
+    overflow-y: visible;
+  }
+
+  .sidebar-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .site-pill {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    color: var(--accent);
-    background: #fdeef4;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-pink);
+    background: rgba(253, 238, 245, 0.95);
+    border: 1px solid rgba(217, 119, 159, 0.25);
     border-radius: 999px;
-    padding: 5px 14px;
-    margin-bottom: 20px;
+    padding: 6px 14px;
+    width: fit-content;
+    box-shadow: 0 2px 8px rgba(217, 119, 159, 0.12);
+    white-space: nowrap;
   }
-  .badge::before {
-    content: "";
-    width: 6px; height: 6px;
+
+  .site-pill-glow {
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--accent-pink);
+    box-shadow: 0 0 0 3px rgba(217, 119, 159, 0.28);
+    animation: soundPulse 2s infinite ease-in-out;
+  }
+
+  @keyframes soundPulse {
+    0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 3px rgba(217, 119, 159, 0.3); }
+    50% { transform: scale(1.35); opacity: 0.75; box-shadow: 0 0 0 6px rgba(217, 119, 159, 0.12); }
+  }
+
+  /* 语言切换胶囊按钮 */
+  .lang-switcher {
+    display: flex;
+    gap: 3px;
+    background: rgba(238, 242, 252, 0.78);
+    padding: 4px;
+    border-radius: 999px;
+    border: 1px solid rgba(225, 232, 248, 0.95);
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .lang-switcher::-webkit-scrollbar { display: none; }
+
+  .lang-switcher button {
+    background: transparent;
+    border: none;
+    border-bottom: none !important;
+    border-radius: 999px;
+    padding: 5px 10px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-decoration: none !important;
+    outline: none;
+  }
+
+  .lang-switcher button:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .lang-switcher button.active {
+    background: #ffffff;
+    color: var(--accent-blue);
+    box-shadow: 0 2px 8px rgba(88, 132, 214, 0.24);
+  }
+
+  .hero-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   h1 {
-    font-size: clamp(1.55rem, 4.2vw, 2.05rem);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.35;
+    font-size: clamp(1.9rem, 2.5vw, 2.35rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.22;
+    background: linear-gradient(135deg, #171926 35%, #445384 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  .meta {
-    margin-top: 10px;
-    font-size: 0.86rem;
-    color: var(--muted);
-  }
-
-  .intro {
-    margin-top: 22px;
-    padding: 16px 20px;
-    font-size: 0.92rem;
-    color: #5c5c6b;
-    background: linear-gradient(120deg, #fdf2f7 0%, #f2f6ff 100%);
-    border-radius: 14px;
-    border: 1px solid #f1eef8;
-  }
-
-  /* ---------- 分组 ---------- */
-  section { margin-top: 38px; }
-
-  h2 {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.8rem;
+  .meta-tagline {
+    font-size: 0.88rem;
     font-weight: 600;
-    letter-spacing: 0.16em;
-    color: var(--accent2);
-    margin-bottom: 14px;
-  }
-  h2::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, #e6e9f5, rgba(230, 233, 245, 0));
+    color: var(--accent-blue);
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
 
-  /* ---------- 链接列表 ---------- */
-  .links {
-    list-style: none;
-    display: grid;
+  /* 声波律动监视器 */
+  .soundwave-widget {
+    background: linear-gradient(135deg, rgba(255, 244, 250, 0.9) 0%, rgba(240, 245, 255, 0.92) 100%);
+    border-radius: 22px;
+    border: 1px solid rgba(230, 222, 245, 0.95);
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 6px 20px -8px rgba(162, 133, 225, 0.18);
+  }
+
+  .soundwave-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .wave-caption {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-pink);
+  }
+
+  .frequency-hint {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    background: rgba(255, 255, 255, 0.75);
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(198, 214, 255, 0.6);
+    white-space: nowrap;
+  }
+
+  .wave-bars-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 32px;
+    padding: 0 4px;
+    gap: 3px;
+  }
+
+  .wave-bar {
+    flex: 1;
+    background: linear-gradient(180deg, var(--accent-pink-vibrant) 0%, var(--accent-blue) 100%);
+    border-radius: 999px;
+    min-height: 4px;
+    animation: waveBounce 1.8s ease-in-out infinite;
+    opacity: 0.85;
+  }
+
+  .wave-bar:nth-child(1) { height: 35%; animation-delay: 0.1s; }
+  .wave-bar:nth-child(2) { height: 60%; animation-delay: 0.25s; }
+  .wave-bar:nth-child(3) { height: 85%; animation-delay: 0.4s; }
+  .wave-bar:nth-child(4) { height: 45%; animation-delay: 0.15s; }
+  .wave-bar:nth-child(5) { height: 95%; animation-delay: 0.5s; }
+  .wave-bar:nth-child(6) { height: 70%; animation-delay: 0.3s; }
+  .wave-bar:nth-child(7) { height: 100%; animation-delay: 0.6s; }
+  .wave-bar:nth-child(8) { height: 65%; animation-delay: 0.35s; }
+  .wave-bar:nth-child(9) { height: 90%; animation-delay: 0.55s; }
+  .wave-bar:nth-child(10) { height: 40%; animation-delay: 0.2s; }
+  .wave-bar:nth-child(11) { height: 75%; animation-delay: 0.45s; }
+  .wave-bar:nth-child(12) { height: 50%; animation-delay: 0.18s; }
+  .wave-bar:nth-child(13) { height: 80%; animation-delay: 0.48s; }
+  .wave-bar:nth-child(14) { height: 35%; animation-delay: 0.12s; }
+
+  @keyframes waveBounce {
+    0%, 100% { transform: scaleY(0.4); opacity: 0.6; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+
+  /* 温暖提示气泡卡片 */
+  .warm-card {
+    padding: 20px 22px;
+    background: linear-gradient(135deg, rgba(255, 242, 248, 0.9) 0%, rgba(242, 247, 255, 0.92) 100%);
+    border-radius: 22px;
+    border: 1px solid rgba(235, 225, 244, 0.95);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    box-shadow: 0 8px 24px -10px rgba(188, 170, 215, 0.25);
+  }
+
+  .warm-header {
+    display: flex;
+    align-items: center;
     gap: 10px;
   }
 
-  .links a {
+  .warm-icon-box {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ffd3e4, #e2edff);
+    display: grid;
+    place-items: center;
+    font-size: 16px;
+    flex: none;
+    box-shadow: 0 2px 6px rgba(217, 119, 159, 0.2);
+  }
+
+  .warm-tag {
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-pink);
+  }
+
+  .warm-body {
+    font-size: 0.88rem;
+    color: #4a4f66;
+    line-height: 1.75;
+  }
+
+  /* 阶段快速导航 */
+  .stage-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+  }
+
+  .stage-nav-title {
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+    padding-left: 4px;
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 15px 18px;
-    border-radius: 15px;
-    background: #fcfcfe;
+    justify-content: space-between;
+  }
+
+  .nav-anchor-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 16px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(228, 232, 246, 0.85);
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav-anchor-item::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .nav-anchor-item:hover {
+    background: #ffffff;
+    border-color: rgba(217, 119, 159, 0.35);
+    color: var(--text-primary);
+    transform: translateX(4px);
+    box-shadow: 0 6px 18px rgba(100, 115, 175, 0.1);
+  }
+
+  .nav-anchor-item:hover::before { opacity: 1; }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-num {
+    font-size: 0.78rem;
+    font-weight: 800;
+    width: 26px; height: 26px;
+    border-radius: 9px;
+    background: rgba(234, 239, 255, 0.95);
+    color: var(--accent-blue);
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(198, 214, 255, 0.6);
+  }
+
+  .nav-anchor-item:hover .nav-num {
+    background: linear-gradient(135deg, #ffd3e4, #e2edff);
+    color: var(--accent-pink);
+  }
+
+  .nav-label {
+    font-size: 0.88rem;
+    font-weight: 700;
+  }
+
+  .nav-counter {
+    font-size: 0.74rem;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: rgba(240, 243, 252, 0.85);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  /* 侧栏底部作者印记 */
+  .sidebar-footer {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px dashed rgba(220, 226, 245, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .author-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+  }
+  .author-badge:hover { transform: translateY(-1px); }
+
+  .author-avatar {
+    width: 36px; height: 36px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #fedce9, #dfeaff);
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 10px rgba(217, 119, 159, 0.15);
+    flex-shrink: 0;
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .author-name {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .author-role {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  /* 右侧：滚动式结构化阶段工作区 */
+  .stages-viewport {
+    padding: 44px 48px 56px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    background: radial-gradient(circle at 90% 10%, rgba(255, 226, 238, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 10% 80%, rgba(219, 232, 255, 0.25) 0%, transparent 45%);
+  }
+
+  /* 阶段区块 Header */
+  .stage-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .stage-banner {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 14px;
+    border-bottom: 1.5px solid rgba(229, 233, 247, 0.95);
+    position: relative;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .stage-banner::after {
+    content: "";
+    position: absolute;
+    bottom: -1.5px; left: 0;
+    width: 60px; height: 2px;
+    background: var(--accent-gradient);
+    border-radius: 2px;
+  }
+
+  .stage-meta-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .display-num {
+    font-size: 2.3rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    background: linear-gradient(135deg, #d9779f 0%, #a285e1 50%, #5884d6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .stage-headings {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stage-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+  }
+
+  .stage-sub {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  .stage-category-pill {
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: rgba(240, 244, 255, 0.9);
+    color: var(--accent-blue);
+    border: 1px solid rgba(198, 214, 255, 0.75);
+    box-shadow: 0 2px 6px rgba(88, 132, 214, 0.1);
+    white-space: nowrap;
+  }
+
+  /* 现代卡片栅格 */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 18px;
+    list-style: none;
+  }
+
+  .grid-span-all { grid-column: 1 / -1; }
+
+  /* 资源卡片 */
+  .resource-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 24px;
+    border-radius: 26px;
+    background: rgba(255, 255, 255, 0.95);
     border: 1px solid var(--line);
     text-decoration: none;
     color: inherit;
-    transition: transform 0.22s ease, box-shadow 0.22s ease,
-                border-color 0.22s ease, background 0.22s ease;
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    box-shadow: var(--shadow-soft);
+    min-height: 145px;
+    overflow: hidden;
   }
 
-  .links a:hover,
-  .links a:focus-visible {
-    outline: none;
+  .resource-card .card-wave-bg {
+    position: absolute;
+    right: -10px; bottom: -15px;
+    width: 140px; height: 70px;
+    opacity: 0.04;
+    pointer-events: none;
+    transition: opacity 0.28s ease, transform 0.28s ease;
+  }
+
+  .resource-card:hover .card-wave-bg {
+    opacity: 0.12;
+    transform: scale(1.08);
+  }
+
+  .resource-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 26px;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, rgba(217, 119, 159, 0.7), rgba(162, 133, 225, 0.5), rgba(88, 132, 214, 0.7)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .resource-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-elevated);
     background: #ffffff;
-    border-color: #ded4ee;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 26px -16px rgba(110, 100, 175, 0.55);
   }
 
-  .icon {
+  .resource-card:hover::after { opacity: 1; }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .card-icon {
     flex: none;
-    width: 42px;
-    height: 42px;
+    width: 50px; height: 50px;
+    border-radius: 17px;
     display: grid;
     place-items: center;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #fdeaf2, #e7efff);
-    color: var(--accent2);
+    background: linear-gradient(135deg, #fceaf2 0%, #e8f0fe 100%);
+    color: var(--accent-blue);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 12px rgba(88, 132, 214, 0.12);
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
   }
 
-  .icon svg {
-    width: 20px;
-    height: 20px;
+  .resource-card:hover .card-icon {
+    transform: scale(1.08) rotate(3deg);
+    background: linear-gradient(135deg, #fbdce9 0%, #dbe8ff 100%);
+    color: var(--accent-pink);
+    box-shadow: 0 6px 16px rgba(217, 119, 159, 0.2);
+  }
+
+  .card-icon svg {
+    width: 24px; height: 24px;
     stroke: currentColor;
     fill: none;
-    stroke-width: 1.8;
+    stroke-width: 1.9;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
 
-  .body { flex: 1; min-width: 0; }
+  .card-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
 
-  .title {
-    display: block;
-    font-size: 0.96rem;
+  .card-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .card-title {
+    font-size: 1.03rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.4;
+    transition: color 0.2s ease;
+  }
+
+  .resource-card:hover .card-title { color: #0b0f24; }
+
+  .card-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.62;
+  }
+
+  .card-subtag {
+    font-size: 0.77rem;
+    color: var(--accent-pink);
     font-weight: 600;
-    color: #33333d;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
   }
 
-  .desc {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--muted);
-    line-height: 1.6;
-    margin-top: 1px;
-    word-break: break-all;
+  /* 卡片底部操作与声学标签 */
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid rgba(238, 241, 252, 0.9);
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
-  .arrow {
+  .pill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .metric-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 8px;
+    background: rgba(243, 246, 255, 0.95);
+    color: var(--accent-blue);
+    border: 1px solid rgba(215, 226, 252, 0.75);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
+
+  .metric-badge.pink {
+    background: rgba(254, 240, 246, 0.9);
+    color: var(--accent-pink);
+    border-color: rgba(250, 214, 230, 0.8);
+  }
+
+  .metric-badge.purple {
+    background: rgba(246, 241, 255, 0.9);
+    color: #8c68cd;
+    border-color: rgba(233, 221, 255, 0.8);
+  }
+
+  .action-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    transition: all 0.22s ease;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(242, 244, 252, 0.8);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .resource-card:hover .action-chip {
+    color: #ffffff;
+    background: var(--accent-gradient);
+    transform: translateX(2px);
+    box-shadow: 0 4px 12px rgba(217, 119, 159, 0.3);
+  }
+
+  /* 特制全宽卡片 */
+  .featured-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(250, 252, 255, 0.96) 100%);
+    border: 1px solid rgba(206, 221, 255, 0.9);
+  }
+
+  /* 底部版权与免责声明卡片 */
+  .disclaimer-card {
+    padding: 24px 28px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(250, 248, 255, 0.92) 0%, rgba(243, 247, 255, 0.92) 100%);
+    border: 1px solid rgba(228, 226, 245, 0.95);
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    margin-top: 12px;
+    box-shadow: 0 8px 24px -10px rgba(162, 133, 225, 0.12);
+  }
+
+  .disclaimer-icon {
+    width: 38px; height: 38px;
+    border-radius: 12px;
+    background: rgba(219, 229, 255, 0.85);
+    color: var(--accent-blue);
+    display: grid;
+    place-items: center;
+    font-size: 18px;
     flex: none;
+    box-shadow: 0 2px 6px rgba(88, 132, 214, 0.15);
+  }
+
+  .disclaimer-text {
+    font-size: 0.84rem;
+    color: #555972;
+    line-height: 1.8;
+  }
+
+  .disclaimer-text strong {
+    color: #2b2e40;
+    font-weight: 700;
+  }
+
+  /* ---------- 贡献者区样式 ---------- */
+  .contributors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .contributor-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(228, 232, 246, 0.85);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--shadow-soft);
+  }
+  .contributor-card:hover {
+    transform: translateY(-3px);
+    background: #ffffff;
+    border-color: rgba(217, 119, 159, 0.35);
+    box-shadow: var(--shadow-elevated);
+  }
+  .contributor-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 4px 12px rgba(88, 132, 214, 0.15);
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  .contributor-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .contributor-name {
     font-size: 0.95rem;
-    color: #c3c3d2;
-    transition: color 0.22s ease, transform 0.22s ease;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .contributor-role {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 2px;
   }
 
-  .links a:hover .arrow {
-    color: var(--accent);
-    transform: translate(2px, -2px);
+  /* 访问量徽章 - 放在标题右侧，样式与 stage-category-pill 统一 */
+  .visitor-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: rgba(240, 244, 255, 0.9);
+    color: var(--accent-blue);
+    border: 1px solid rgba(198, 214, 255, 0.75);
+    box-shadow: 0 2px 6px rgba(88, 132, 214, 0.1);
+    white-space: nowrap;
+  }
+  .visitor-badge svg {
+    width: 14px; height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .visitor-badge .count {
+    font-weight: 800;
+    color: var(--accent-pink);
   }
 
-  /* ---------- 提示 ---------- */
-  .note {
-    margin-top: 40px;
-    padding-top: 22px;
-    border-top: 1px dashed #e8e8f2;
-    font-size: 0.82rem;
-    color: var(--muted);
-    line-height: 1.85;
+  /* ---------- 返回顶部按钮 ---------- */
+  .back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 8px 24px rgba(88, 132, 214, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1000;
   }
-  .note strong { color: #6d6d7d; font-weight: 600; }
 
-  /* ---------- 响应式 ---------- */
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .back-to-top:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 28px rgba(217, 119, 159, 0.4);
+  }
+
+  .back-to-top svg {
+    width: 22px; height: 22px;
+  }
+
+  /* 响应式断点 */
+  @media (max-width: 1080px) {
+    .layout-grid { grid-template-columns: 1fr; }
+    .guide-sidebar {
+      position: static;
+      max-height: none;
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      padding: 32px 28px;
+    }
+    .stages-viewport { padding: 32px 28px 48px; }
+    .back-to-top { bottom: 20px; right: 20px; width: 42px; height: 42px; }
+    .back-to-top svg { width: 18px; height: 18px; }
+  }
+
   @media (max-width: 640px) {
-    body { padding: 26px 14px 48px; }
-    .card { padding: 32px 22px 36px; border-radius: 20px; }
-    .lang-switcher { position: static; margin-bottom: 16px; justify-content: flex-end; }
-    .links a { padding: 13px 14px; gap: 12px; }
-    .icon { width: 36px; height: 36px; border-radius: 10px; }
-    .icon svg { width: 18px; height: 18px; }
-    .intro { padding: 14px 16px; }
+    body { padding: 12px; }
+    .dashboard-shell { border-radius: 24px; }
+    .guide-sidebar { padding: 24px 18px; }
+    .stages-viewport { padding: 24px 16px 36px; gap: 36px; }
+    .cards-grid { grid-template-columns: 1fr; }
+    
+    .brand-row { flex-direction: column; align-items: flex-start; }
+    .lang-switcher { width: 100%; justify-content: space-between; }
+    .lang-switcher button { flex: 1; text-align: center; padding: 6px 0; }
+    
+    .stage-banner { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .stage-category-pill { align-self: flex-start; }
+    .visitor-badge { align-self: flex-start; }
+    
+    .card-footer { flex-direction: column; align-items: flex-start; }
+    .pill-tags { width: 100%; margin-bottom: 4px; }
+    .card-footer > div { width: 100%; display: flex; justify-content: space-between; gap: 8px; }
+    .action-chip { flex: 1; justify-content: center; }
+
+    /* 移动端贡献者布局调整 */
+    .contributors-grid { grid-template-columns: 1fr; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -270,316 +1048,764 @@
     }
   }
 </style>
+<!-- 引入不蒜子统计脚本 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </head>
 <body>
+<!-- 背景声波星轨线条 -->
+<div aria-hidden="true" class="cosmic-orbits">
+<div class="orbit-ring orbit-ring-1"></div>
+<div class="orbit-ring orbit-ring-2"></div>
+</div>
+<main class="dashboard-shell">
+<!-- 顶部声谱流光带 -->
+<div class="top-spectrum-bar"></div>
+<div class="layout-grid">
+<!-- 左侧：声学控制台常驻导引 -->
+<aside class="guide-sidebar">
+<div class="sidebar-header">
+<div class="brand-row">
+<div class="site-pill">
+<span class="site-pill-glow"></span>
+<span data-i18n="badge">STAGE GUIDE · 阶段指南</span>
+</div>
+<!-- 访问量计数器，已按截图位置移动到标题右侧 -->
+<div class="visitor-badge" title="总访问量">
+    <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+    <span data-i18n="visitor_label">访客:</span>
+    <span id="busuanzi_value_site_pv" class="count">--</span>
+</div>
+<div aria-label="Language Selector" class="lang-switcher" role="navigation">
+<button class="active" id="btn-zh" onclick="setLanguage('zh')">中文</button>
+<button id="btn-en" onclick="setLanguage('en')">English</button>
+<button id="btn-ja" onclick="setLanguage('ja')">日本語</button>
+<button id="btn-ko" onclick="setLanguage('ko')">한국어</button>
+</div>
+</div>
+<div class="hero-titles">
+<h1 data-i18n="title">MTF 声音女性化训练资源</h1>
+<div class="meta-tagline">
+<span>✦</span>
+<span data-i18n="meta">练习手册 · 视频教程 · 辅助工具 · 友情链接</span>
+</div>
+</div>
+</div>
+<!-- 创意声波律动监视器 -->
+<div aria-hidden="true" class="soundwave-widget">
+<div class="soundwave-top">
+<span class="wave-caption">
+<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24" width="14">
+<path d="M12 2v20M17 5v14M7 9v6M2 12h2M20 12h2"></path>
+</svg>
+<span data-i18n="acoustic_monitor">声学状态 / ACOUSTIC RESONANCE</span>
+</span>
+<span class="frequency-hint">F0 180~240Hz</span>
+</div>
+<div class="wave-bars-container">
+<div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+<div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+<div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+<div class="wave-bar"></div><div class="wave-bar"></div>
+</div>
+</div>
+<!-- 温暖鼓励卡片 -->
+<div class="warm-card">
+<div class="warm-header">
+<div class="warm-icon-box">🌱</div>
+<span class="warm-tag" data-i18n="warm_tag">练习守则 &amp; 温暖寄语</span>
+</div>
+<p class="warm-body" data-i18n="intro">这里收录了与声音女性化训练相关的一些常用资料。练习是一件需要耐心的事，不必急着和别人比较——慢慢来，每一段声音都会比昨天更接近你想要的自己。</p>
+</div>
+<!-- 阶段跳转导航 -->
+<nav aria-label="Stages Shortcut" class="stage-nav">
+<span class="stage-nav-title">
+<span data-i18n="stage_nav_title">训练阶段索引 / PHASES</span>
+<span style="font-size: 10px; color: var(--accent-pink); letter-spacing: 0.05em;">ORBITS 01-04</span>
+</span>
+<a class="nav-anchor-item" href="#stage-1">
+<div class="nav-left">
+<span class="nav-num">01</span>
+<span class="nav-label" data-i18n="sec1">训练资料</span>
+</div>
+<span class="nav-counter">3 Guides</span>
+</a>
+<a class="nav-anchor-item" href="#stage-2">
+<div class="nav-left">
+<span class="nav-num">02</span>
+<span class="nav-label" data-i18n="sec2">辅助工具</span>
+</div>
+<span class="nav-counter">4 Tools</span>
+</a>
+<a class="nav-anchor-item" href="#stage-3">
+<div class="nav-left">
+<span class="nav-num">03</span>
+<span class="nav-label" data-i18n="sec3">友情链接</span>
+</div>
+<span class="nav-counter">3 Links</span>
+</a>
+<a class="nav-anchor-item" href="#stage-4">
+<div class="nav-left">
+<span class="nav-num">04</span>
+<span class="nav-label" data-i18n="sec_contributors">贡献者</span>
+</div>
+<span class="nav-counter">2 People</span>
+</a>
+</nav>
+<!-- 侧栏底部作者信息 -->
+<div class="sidebar-footer">
+<a class="author-badge" href="https://clipsule.github.io/Introduction/" rel="noopener noreferrer" target="_blank">
+<div class="author-avatar">🍥</div>
+<div class="author-info">
+<span class="author-name">晴れ猫🏳️‍⚧️🍥</span>
+<span class="author-role" data-i18n="curator_role">整理与译者 · 维护者</span>
+</div>
+</a>
+<span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">2025 EDITION</span>
+</div>
+</aside>
+<!-- 右侧：滚动式结构化阶段工作区 -->
+<div class="stages-viewport">
+<!-- Stage 1 -->
+<section class="stage-section" id="stage-1">
+<div class="stage-banner">
+<div class="stage-meta-left">
+<span class="display-num">01</span>
+<div class="stage-headings">
+<h2 class="stage-title" data-i18n="sec1">训练资料</h2>
+<span class="stage-sub" data-i18n="phase1">Phase 1 · Foundation &amp; Video Courses</span>
+</div>
+</div>
+<span class="stage-category-pill" data-i18n="tag_handbooks">核心教程与示范</span>
+</div>
+<ul class="cards-grid">
+<li class="grid-span-all">
+<a class="resource-card featured-card" href="https://www.bilibili.com/video/BV14zGH6uEdV?vd_source=ec8fbdde67fb604ab21c28d4fdba08e8" rel="noopener noreferrer" target="_blank">
+<svg class="card-wave-bg" fill="none" stroke="currentColor" viewBox="0 0 100 30"><path d="M0 15 Q25 0 50 15 T100 15" stroke-width="4"></path></svg>
+<div class="card-top">
+<div class="card-icon"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
+<div class="card-content">
+<div class="card-title-row"><span class="card-title" data-i18n="link1_title">MTF 声音女性化训练视频教程（原中文版）</span></div>
+<span class="card-desc" data-i18n="link1_desc">Bilibili 视频合集 · 跟着示范练习更直观</span>
+</div>
+</div>
+<div class="card-footer">
+<div class="pill-tags">
+<span class="metric-badge pink" data-i18n="metric_video">Video Tutorial</span>
+<span class="metric-badge" data-i18n="metric_demo">示范演练</span>
+<span class="metric-badge" data-i18n="metric_bilibili">Bilibili</span>
+</div>
+<span class="action-chip"><span data-i18n="btn_open">访问教程</span> ↗</span>
+</div>
+</a>
+</li>
+<li>
+<a class="resource-card" href="https://mtf-voice-training.vercel.app/" rel="noopener noreferrer" target="_blank">
+<svg class="card-wave-bg" fill="none" stroke="currentColor" viewBox="0 0 100 30"><path d="M0 15 Q25 5 50 15 T100 15" stroke-width="3"></path></svg>
+<div class="card-top">
+<div class="card-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+<div class="card-content">
+<div class="card-title-row"><span class="card-title" data-i18n="link2_title">MTF 声音女性化练习手册（原中文版）</span></div>
+<span class="card-desc" data-i18n="link2_desc">来自 Bilibili あおぎ葵，从发声原理到具体练习的完整文字教程</span>
+</div>
+</div>
+<div class="card-footer">
+<div class="pill-tags"><span class="metric-badge" data-i18n="metric_theory">发声原理</span><span class="metric-badge" data-i18n="metric_text_lib">文字练习库</span></div>
+<span class="action-chip"><span data-i18n="btn_read">在线阅读</span> ↗</span>
+</div>
+</a>
+</li>
+<li>
+<a class="resource-card" href="https://mtf-voice-training-full-language.vercel.app/" rel="noopener noreferrer" target="_blank">
+<svg class="card-wave-bg" fill="none" stroke="currentColor" viewBox="0 0 100 30"><path d="M0 15 Q25 25 50 15 T100 15" stroke-width="3"></path></svg>
+<div class="card-top">
+<div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" x2="22" y1="12" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+<div class="card-content">
+<div class="card-title-row"><span class="card-title" data-i18n="link3_title">MTF 声音女性化练习手册（中、日、英、韩语版）</span></div>
+<span class="card-subtag" data-i18n="link3_desc1">日语、英语、韩语 译者：晴れ猫🏳️‍⚧️🍥</span>
+<span class="card-desc" data-i18n="link3_desc2">来自 Bilibili あおぎ葵的完整文字教程，包含多种语言版本</span>
+</div>
+</div>
+<div class="card-footer">
+<div class="pill-tags"><span class="metric-badge purple" data-i18n="metric_zh_ja_en_ko">ZH / JA / EN / KO</span><span class="metric-badge" data-i18n="metric_multilang">多语言支持</span></div>
+<span class="action-chip"><span data-i18n="btn_read">在线阅读</span> ↗</span>
+</div>
+</a>
+</li>
+</ul>
+</section>
 
-  <main class="card">
-    <!-- 语言切换器 -->
-    <div class="lang-switcher">
-      <button onclick="setLanguage('zh')" id="btn-zh" class="active">中文</button>
-      <button onclick="setLanguage('en')" id="btn-en">English</button>
-      <button onclick="setLanguage('ja')" id="btn-ja">日本語</button>
-      <button onclick="setLanguage('ko')" id="btn-ko">한국어</button>
-    </div>
+<!-- Stage 2 -->
+<section class="stage-section" id="stage-2">
+<div class="stage-banner">
+<div class="stage-meta-left">
+<span class="display-num">02</span>
+<div class="stage-headings">
+<h2 class="stage-title" data-i18n="sec2">辅助工具</h2>
+<span class="stage-sub" data-i18n="phase2">Phase 2 · Audio &amp; Acoustic Tools</span>
+</div>
+</div>
+<span class="stage-category-pill" data-i18n="tag_tools">声学监测与训练</span>
+</div>
+<ul class="cards-grid">
+<li>
+<a class="resource-card" href="https://devextras.com/voicetools/" rel="noopener noreferrer" target="_blank">
+<svg class="card-wave-bg" fill="none" stroke="currentColor" viewBox="0 0 100 30"><path d="M0 15 Q25 0 50 15 T100 15" stroke-width="3"></path></svg>
+<div class="card-top">
+<div class="card-icon"><svg viewBox="0 0 24 24"><rect height="20" rx="2" width="10" x="7" y="2"></rect><path d="M12 18h.01"></path></svg></div>
+<div class="card-content">
+<div class="card-title-row"><span class="card-title" data-i18n="link4_title">Voice Tools（手机端）</span></div>
+<span class="card-desc" data-i18n="link4_desc">实时查看音高与共振峰 · Android 于 Google Play、Apple 于 App Store 获取</span>
+</div>
+</div>
+<div class="card-footer">
+<div class="pill-tags">
+<span class="metric-badge pink" data-i18n="metric_pitch">Pitch · 音高</span>
+<span class="metric-badge" data-i18n="metric_formant">Formants · 共振峰</span>
+<span class="metric-badge" data-i18n="metric_mobile">iOS / Android</span>
+</div>
+<span class="action-chip"><span data-i18n="btn_get">获取工具</span> ↗</span>
+</div>
+</a>
+</li>
+<li>
+<a class="resource-card" href="https://www.fon.hum.uva.nl/praat/" rel="noopener noreferrer" target="_blank">
+<svg class="card-wave-bg" fill="none" stroke="currentColor" viewBox="0 0 100 30"><path d="M0 15 Q25 30 50 15 T100 15" stroke-width="3"></path></svg>
+<div class="card-top">
+<div class="card-icon"><svg viewBox="0 0 24 24"><rect height="12" rx="2" width="18" x="3" y="4"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg></div>
+<div class="card-content">
+<div class="card-title-row"><span class="card-title" data-i18n="link5_title">Praat（电脑端）</span></div>
+<span class="card-desc" data-i18n="link5_desc">专业的语音分析软件 · 官方站点免费下载</span>
+</div>
+</div>
+<div class="card-footer">
+<div class="pill-tags">
+<span class="metric-badge" data-i18n="metric_spec">Spectrogram · 语图</span>
+<span class="metric-badge" data-i18n="metric_academic">专业学术分析</span>
+<span class="metric-badge" data-i18n="metric_desktop">Desktop</span>
+</div>
+<span class="action-chip"><span data-i18n="btn_download">官方下载</span> ↗</span>
+</div>
+</a>
+</li>
+<li>
+<a class="resource-card" href="https://k-vault-67u.pages.dev/file/r2:r2_1791722740723_n8wcys.7z" rel="noopener noreferrer" target="_blank">
+<svg class="card-wave-bg" fill="none" stroke="currentColor" viewBox="0 0 100 30"><path d="M0 15 Q25 0 50 15 T100 15" stroke-width="3"></path></svg>
+<div class="card-top">
+<div class="card-icon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg></div>
+<div class="card-content">
+<div class="card-title-row"><span class="card-title" data-i18n="link6_title">Praat 汉化修改版（4.5）安装程序</span></div>
+<span class="card-desc" data-i18n="link6_desc">第三方汉化版本 · 下载后需自行解压安装</span>
+</div>
+</div>
+<div class="card-footer">
+<div class="pill-tags"><span class="metric-badge purple" data-i18n="metric_cn_ui">中文界面</span><span class="metric-badge" data-i18n="metric_installer">安装程序包</span></div>
+<span class="action-chip"><span data-i18n="btn_dl">直接下载</span> ↗</span>
+</div>
+</a>
+</li>
+<!-- Koenami 卡片 -->
+<li>
+<div class="resource-card">
+<svg class="card-wave-bg" fill="none" stroke="currentColor" viewBox="0 0 100 30"><path d="M0 15 Q25 25 50 15 T100 15" stroke-width="3"></path></svg>
+<div class="card-top">
+<div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20"></path><path d="M5 9l7-7 7 7"></path><circle cx="12" cy="15" r="5"></circle></svg></div>
+<div class="card-content">
+<div class="card-title-row"><span class="card-title" data-i18n="link7_title">性别声音练习工具 Koenami</span></div>
+<span class="card-subtag" data-i18n="link7_desc1">面向双声类目标、跨性别者或探索者</span>
+<span class="card-desc" data-i18n="link7_desc2">由 まくぽり 制作的开源网页练习工具 · GitHub：transnavi/koenami</span>
+</div>
+</div>
+<div class="card-footer">
+<div class="pill-tags"><span class="metric-badge" data-i18n="metric_opensource">Web Open-Source</span><span class="metric-badge pink" data-i18n="metric_explore">双声类/探索</span></div>
+<div style="display: flex; gap: 8px; flex-shrink: 0;">
+<a class="action-chip" href="https://koe.transnavi.jp/" target="_blank" rel="noopener noreferrer"><span data-i18n="btn_webapp">在线使用</span> ↗</a>
+<a class="action-chip" href="https://github.com/transnavi/koenami" target="_blank" rel="noopener noreferrer"><span data-i18n="btn_repo">GitHub</span> ↗</a>
+</div>
+</div>
+</div>
+</li>
+</ul>
+</section>
 
-    <span class="badge" data-i18n="badge">RESOURCES · 资源导航</span>
+<!-- Stage 3 -->
+<section class="stage-section" id="stage-3">
+<div class="stage-banner">
+<div class="stage-meta-left">
+<span class="display-num">03</span>
+<div class="stage-headings">
+<h2 class="stage-title" data-i18n="sec3">友情链接</h2>
+<span class="stage-sub" data-i18n="phase3">Phase 3 · Community &amp; Knowledge Wiki</span>
+</div>
+</div>
+<span class="stage-category-pill" data-i18n="tag_community">社区互助网络</span>
+</div>
+<ul class="cards-grid">
+<li>
+<a class="resource-card" href="https://mtf.wiki/zh-cn" rel="noopener noreferrer" target="_blank">
+<svg class="card-wave-bg" fill="none" stroke="currentColor" viewBox="0 0 100 30"><path d="M0 15 Q25 0 50 15 T100 15" stroke-width="3"></path></svg>
+<div class="card-top">
+<div class="card-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></div>
+<div class="card-content">
+<div class="card-title-row"><span class="card-title">MTF Wiki</span></div>
+<span class="card-desc" data-i18n="link8_desc">mtf.wiki · 中文跨性别相关知识与资料</span>
+</div>
+</div>
+<div class="card-footer">
+<div class="pill-tags"><span class="metric-badge" data-i18n="metric_wiki">中文百科</span><span class="metric-badge" data-i18n="metric_guide">全方位指引</span></div>
+<span class="action-chip"><span data-i18n="btn_explore">访问站点</span> ↗</span>
+</div>
+</a>
+</li>
+<li>
+<a class="resource-card" href="https://transnavi.jp/" rel="noopener noreferrer" target="_blank">
+<svg class="card-wave-bg" fill="none" stroke="currentColor" viewBox="0 0 100 30"><path d="M0 15 Q25 30 50 15 T100 15" stroke-width="3"></path></svg>
+<div class="card-top">
+<div class="card-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></div>
+<div class="card-content">
+<div class="card-title-row"><span class="card-title">とらんすナビ</span></div>
+<span class="card-desc" data-i18n="link9_desc">transnavi.jp · 日文跨性别相关知识与资料</span>
+</div>
+</div>
+<div class="card-footer">
+<div class="pill-tags"><span class="metric-badge purple" data-i18n="metric_jp_portal">日本語ポータル</span><span class="metric-badge" data-i18n="metric_jp_wiki">Japan Trans Wiki</span></div>
+<span class="action-chip"><span data-i18n="btn_explore">访问站点</span> ↗</span>
+</div>
+</a>
+</li>
+<li class="grid-span-all">
+<a class="resource-card" href="https://clipsule.github.io/Introduction/" rel="noopener noreferrer" target="_blank">
+<svg class="card-wave-bg" fill="none" stroke="currentColor" viewBox="0 0 100 30"><path d="M0 15 Q25 10 50 15 T100 15" stroke-width="4"></path></svg>
+<div class="card-top">
+<div class="card-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+<div class="card-content">
+<div class="card-title-row"><span class="card-title" data-i18n="link10_title">关于本站作者 · 晴れ猫🏳️‍⚧️🍥</span></div>
+<span class="card-desc" data-i18n="link10_desc">clipsule.github.io · 本站作者的个人简介与版权声明</span>
+</div>
+</div>
+<div class="card-footer">
+<div class="pill-tags"><span class="metric-badge pink" data-i18n="metric_author">Author Profile</span><span class="metric-badge" data-i18n="metric_profile">个人主页与项目</span></div>
+<span class="action-chip"><span data-i18n="btn_view">查看主页</span> ↗</span>
+</div>
+</a>
+</li>
+</ul>
+</section>
 
-    <h1 data-i18n="title">MTF 声音女性化训练资源</h1>
-    <p class="meta" data-i18n="meta">练习手册 · 视频教程 · 辅助工具 · 友情链接</p>
+<!-- Stage 4: 贡献者与访问量 -->
+<section class="stage-section" id="stage-4">
+<div class="stage-banner">
+<div class="stage-meta-left">
+<span class="display-num">04</span>
+<div class="stage-headings">
+<h2 class="stage-title" data-i18n="sec_contributors">贡献者</h2>
+<span class="stage-sub" data-i18n="phase4">Phase 4 · Contributors &amp; Credits</span>
+</div>
+</div>
+</div>
+<div class="contributors-grid">
+    <!-- 创作者/所有者，调整到第一个 -->
+    <a class="contributor-card" href="https://github.com/clipsule" target="_blank" rel="noopener noreferrer">
+        <img class="contributor-avatar" src="https://github.com/clipsule.png" alt="clipsule">
+        <div class="contributor-info">
+            <span class="contributor-name">clipsule</span>
+            <span class="contributor-role" data-i18n="contributor_clipsule">创作者 / 所有者</span>
+        </div>
+    </a>
+    <!-- 代码贡献者 -->
+    <a class="contributor-card" href="https://github.com/mkpoli" target="_blank" rel="noopener noreferrer">
+        <img class="contributor-avatar" src="https://github.com/mkpoli.png" alt="mkpoli">
+        <div class="contributor-info">
+            <span class="contributor-name">mkpoli</span>
+            <span class="contributor-role" data-i18n="contributor_mkpoli">代码贡献 / 项目支持</span>
+        </div>
+    </a>
+</div>
+</section>
 
-    <p class="intro" data-i18n="intro">
-      这里收录了与声音女性化训练相关的一些常用资料。练习是一件需要耐心的事，
-      不必急着和别人比较——慢慢来，每一段声音都会比昨天更接近你想要的自己。
-    </p>
+<!-- 底部版权与免责声明 -->
+<footer class="disclaimer-card">
+<div class="disclaimer-icon">ℹ</div>
+<div class="disclaimer-text">
+<strong data-i18n="note_strong">版权与声明：</strong>
+<span data-i18n="note_content">本页面由 晴れ猫🏳️‍⚧️🍥 整理发布。所有链接均指向第三方站点，内容与更新由各站点自行维护。练习时请量力而行，感到喉咙疼痛或声音沙哑就停下来休息，不要勉强硬撑。声音的改变以「月」为单位，坚持比强度更重要。</span>
+</div>
+</footer>
+</div>
+</div>
+</main>
 
-    <!-- 训练资料 -->
-    <section>
-      <h2 data-i18n="sec1">训练资料</h2>
-      <ul class="links">
-        <li>
-          <a href="https://www.bilibili.com/video/BV14zGH6uEdV?vd_source=ec8fbdde67fb604ab21c28d4fdba08e8"
-             target="_blank" rel="noopener noreferrer">
-            <span class="icon">
-              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            </span>
-            <span class="body">
-              <span class="title" data-i18n="link1_title">MTF 声音女性化训练视频教程（原中文版）</span>
-              <span class="desc" data-i18n="link1_desc">Bilibili 视频合集 · 跟着示范练习更直观</span>
-            </span>
-            <span class="arrow">↗</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://mtf-voice-training.vercel.app/"
-             target="_blank" rel="noopener noreferrer">
-            <span class="icon">
-              <svg viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path><path d="M4 6h16"></path><path d="M8 10h8"></path><path d="M8 14h5"></path></svg>
-            </span>
-            <span class="body">
-              <span class="title" data-i18n="link2_title">MTF 声音女性化练习手册（原中文版）</span>
-              <span class="desc" data-i18n="link2_desc">来自bilibiliあおぎ葵的从发声原理到具体练习的完整文字教程</span>
-            </span>
-            <span class="arrow">↗</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://mtf-voice-training-full-language.vercel.app/"
-             target="_blank" rel="noopener noreferrer">
-            <span class="icon">
-              <svg viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path><path d="M4 6h16"></path><path d="M8 10h8"></path><path d="M8 14h5"></path></svg>
-            </span>
-            <span class="body">
-              <span class="title" data-i18n="link3_title">MTF 声音女性化练习手册（中、日、英、韩语版）</span>
-              <span class="desc" data-i18n="link3_desc1">日语、英语、韩语 译者：晴れ猫🏳️‍⚧️🍥</span>
-              <span class="desc" data-i18n="link3_desc2">来自bilibiliあおぎ葵的从发声原理到具体练习的完整文字教程，包含多种语言版本</span>
-            </span>
-            <span class="arrow">↗</span>
-          </a>
-        </li>
-      </ul>
-    </section>
+<!-- 返回顶部按钮 -->
+<button id="backToTop" class="back-to-top" aria-label="返回顶部">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</button>
 
-    <!-- 辅助工具 -->
-    <section>
-      <h2 data-i18n="sec2">辅助工具</h2>
-      <ul class="links">
-        <li>
-          <a href="https://devextras.com/voicetools/" target="_blank" rel="noopener noreferrer">
-            <span class="icon">
-              <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"></rect><path d="M12 18h.01"></path></svg>
-            </span>
-            <span class="body">
-              <span class="title" data-i18n="link4_title">Voice Tools（手机端）</span>
-              <span class="desc" data-i18n="link4_desc">实时查看音高与共振峰 · Android 于 Google Play、Apple 于 App Store 获取</span>
-            </span>
-            <span class="arrow">↗</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://www.fon.hum.uva.nl/praat/" target="_blank" rel="noopener noreferrer">
-            <span class="icon">
-              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path></svg>
-            </span>
-            <span class="body">
-              <span class="title" data-i18n="link5_title">Praat（电脑端）</span>
-              <span class="desc" data-i18n="link5_desc">专业的语音分析软件 · 官网下载</span>
-            </span>
-            <span class="arrow">↗</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://k-vault-67u.pages.dev/file/r2:r2_1791722740723_n8wcys.7z" target="_blank" rel="noopener noreferrer">
-            <span class="icon">
-              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            </span>
-            <span class="body">
-              <span class="title" data-i18n="link6_title">Praat 汉化修改版（4.5）安装程序</span>
-              <span class="desc" data-i18n="link6_desc">第三方汉化版本 · 下载后需自行解压安装</span>
-            </span>
-            <span class="arrow">↗</span>
-          </a>
-        </li>
-      </ul>
-    </section>
-
-    <!-- 友情链接 & 关于作者 -->
-    <section>
-      <h2 data-i18n="sec3">友情链接</h2>
-      <ul class="links">
-        <li>
-          <a href="https://mtf.wiki/zh-cn" target="_blank" rel="noopener noreferrer">
-            <span class="icon">
-              <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-            </span>
-            <span class="body">
-              <span class="title">MTF Wiki</span>
-              <span class="desc" data-i18n="link7_desc">mtf.wiki · 中文跨性别相关知识与资料</span>
-            </span>
-            <span class="arrow">↗</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://clipsule.github.io/Introduction/" target="_blank" rel="noopener noreferrer">
-            <span class="icon">
-              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-            </span>
-            <span class="body">
-              <span class="title" data-i18n="link8_title">关于此网站作者 · 晴れ猫🏳️‍⚧️🍥</span>
-              <span class="desc" data-i18n="link8_desc">clipsule.github.io · 本站作者的个人简介与版权声明</span>
-            </span>
-            <span class="arrow">↗</span>
-          </a>
-        </li>
-      </ul>
-    </section>
-
-    <p class="note">
-      <strong data-i18n="note_strong">版权与声明：</strong><span data-i18n="note_content">本页面由 晴れ猫🏳️‍⚧️🍥 整理发布。所有链接均指向第三方站点，内容与更新由各站点自行维护。练习时请量力而行，感到喉咙疼痛或声音沙哑就停下来休息，不要勉强硬撑。声音的改变以「月」为单位，坚持比强度更重要。</span>
-    </p>
-  </main>
-
-  <!-- 翻译字典与切换逻辑 -->
-  <script>
-    // 将所有的文案提取成 JSON 对象
-    const translations = {
-      zh: {
-        badge: "RESOURCES · 资源导航",
-        title: "MTF 声音女性化训练资源",
-        meta: "练习手册 · 视频教程 · 辅助工具 · 友情链接",
-        intro: "这里收录了与声音女性化训练相关的一些常用资料。练习是一件需要耐心的事，不必急着和别人比较——慢慢来，每一段声音都会比昨天更接近你想要的自己。",
-        sec1: "训练资料",
-        link1_title: "MTF 声音女性化训练视频教程（原中文版）",
-        link1_desc: "Bilibili 视频合集 · 跟着示范练习更直观",
-        link2_title: "MTF 声音女性化练习手册（原中文版）",
-        link2_desc: "来自bilibiliあおぎ葵的从发声原理到具体练习的完整文字教程",
-        link3_title: "MTF 声音女性化练习手册（中、日、英、韩语版）",
-        link3_desc1: "日语、英语、韩语 译者：晴れ猫🏳️‍⚧️🍥",
-        link3_desc2: "来自bilibiliあおぎ葵的从发声原理到具体练习的完整文字教程，包含多种语言版本",
-        sec2: "辅助工具",
-        link4_title: "Voice Tools（手机端）",
-        link4_desc: "实时查看音高与共振峰 · Android 于 Google Play、Apple 于 App Store 获取",
-        link5_title: "Praat（电脑端）",
-        link5_desc: "专业的语音分析软件 · 官网下载",
-        link6_title: "Praat 汉化修改版（4.5）安装程序",
-        link6_desc: "第三方汉化版本 · 下载后需自行解压安装",
-        sec3: "友情链接",
-        link7_desc: "mtf.wiki · 中文跨性别相关知识与资料",
-        link8_title: "关于此网站作者 · 晴れ猫🏳️‍⚧️🍥",
-        link8_desc: "clipsule.github.io · 本站作者的个人简介与版权声明",
-        note_strong: "版权与声明：",
-        note_content: "本页面由 晴れ猫🏳️‍⚧️🍥 整理发布。所有链接均指向第三方站点，内容与更新由各站点自行维护。练习时请量力而行，感到喉咙疼痛或声音沙哑就停下来休息，不要勉强硬撑。声音的改变以「月」为单位，坚持比强度更重要。"
-      },
-      en: {
-        badge: "RESOURCES · NAVIGATION",
-        title: "MTF Voice Feminization Training Resources",
-        meta: "Handbook · Video Tutorials · Tools · Links",
-        intro: "This page collects commonly used resources related to voice feminization training. Practice requires patience; there's no need to compare yourself with others—take your time, and every voice will get closer to the self you want.",
-        sec1: "Training Materials",
-        link1_title: "MTF Voice Feminization Video Tutorial (Original Chinese)",
-        link1_desc: "Bilibili video collection · Follow the demonstrations for more intuitive practice",
-        link2_title: "MTF Voice Feminization Handbook (Original Chinese)",
-        link2_desc: "A complete written tutorial from vocal principles to specific exercises by bilibili Aogi Aoi",
-        link3_title: "MTF Voice Feminization Handbook (ZH, JA, EN, KO)",
-        link3_desc1: "Japanese, English, Korean translation by 晴れ猫🏳️‍⚧️🍥",
-        link3_desc2: "A complete written tutorial from vocal principles to specific exercises by bilibili Aogi Aoi, available in multiple languages",
-        sec2: "Tools",
-        link4_title: "Voice Tools (Mobile)",
-        link4_desc: "View pitch and formants in real-time · Available on Google Play (Android) and App Store (Apple)",
-        link5_title: "Praat (Desktop)",
-        link5_desc: "Professional speech analysis software · Download from official website",
-        link6_title: "Praat Chinese Mod (4.5) Installer",
-        link6_desc: "Third-party Chinese version · Extract and install after download",
-        sec3: "Links",
-        link7_desc: "mtf.wiki · Chinese transgender related knowledge and resources",
-        link8_title: "About the Author · 晴れ猫🏳️‍⚧️🍥",
-        link8_desc: "clipsule.github.io · Author's personal profile and copyright notice",
-        note_strong: "Copyright & Disclaimer: ",
-        note_content: "This page is compiled and published by 晴れ猫🏳️‍⚧️🍥. All links point to third-party websites; content and updates are maintained by their respective sites. Practice within your limits, rest if you feel throat pain or hoarseness, and don't push too hard. Voice changes take months; consistency is more important than intensity."
-      },
-      ja: {
-        badge: "RESOURCES · リソースナビ",
-        title: "MTF 声の女性化トレーニングリソース",
-        meta: "練習マニュアル · 動画チュートリアル · 補助ツール · リンク",
-        intro: "ここでは、声の女性化トレーニングに関連するよく使われる資料を集めています。練習には忍耐が必要です。他人と比較する必要はありません——ゆっくりと、あなたの声が昨日よりも理想の自分に近づいていくのを感じてください。",
-        sec1: "トレーニング資料",
-        link1_title: "MTF 声の女性化トレーニング動画（オリジナル中国語版）",
-        link1_desc: "Bilibili 動画コレクション · お手本を見ながら練習するとより直感的です",
-        link2_title: "MTF 声の女性化練習マニュアル（オリジナル中国語版）",
-        link2_desc: "bilibili あおぎ葵による、発声原理から具体的な練習までの完全なテキストチュートリアル",
-        link3_title: "MTF 声の女性化練習マニュアル（中日英韓語版）",
-        link3_desc1: "日本語・英語・韓国語 翻訳：晴れ猫🏳️‍⚧️🍥",
-        link3_desc2: "bilibili あおぎ葵による、発声原理から具体的な練習までの完全なテキストチュートリアル、多言語版を含む",
-        sec2: "補助ツール",
-        link4_title: "Voice Tools（モバイル版）",
-        link4_desc: "ピッチとフォルマントをリアルタイムで確認 · Android は Google Play、Apple は App Store から取得",
-        link5_title: "Praat（デスクトップ版）",
-        link5_desc: "プロ仕様の音声分析ソフト · 公式サイトからダウンロード",
-        link6_title: "Praat 中国語化修正版（4.5）インストーラー",
-        link6_desc: "サードパーティの中国語版 · ダウンロード後に解凍してインストール",
-        sec3: "リンク",
-        link7_desc: "mtf.wiki · 中国語のトランスジェンダー関連の知識と資料",
-        link8_title: "このサイトの作者について · 晴れ猫🏳️‍⚧️🍥",
-        link8_desc: "clipsule.github.io · 作者のプロフィールと著作権表示",
-        note_strong: "著作権と免責事項：",
-        note_content: "このページは 晴れ猫🏳️‍⚧️🍥 によって整理・公開されています。すべてのリンクはサードパーティのサイトを指しており、内容と更新は各サイトによって維持されています。無理のない範囲で練習し、喉の痛みや声のかすれを感じたら休憩してください。声の変化には「月」単位の時間がかかります。強度よりも継続が重要です。"
-      },
-      ko: {
-        badge: "RESOURCES · 리소스 내비게이션",
-        title: "MTF 음성 여성화 훈련 자료",
-        meta: "연습 매뉴얼 · 동영상 튜토리얼 · 보조 도구 · 링크",
-        intro: "여기에는 음성 여성화 훈련과 관련된 일반적인 자료들이 모여 있습니다. 연습에는 인내가 필요합니다. 다른 사람과 비교할 필요는 없습니다——천천히, 매일 조금씩 당신의 목소리가 원하는 자신에게 더 가까워질 것입니다.",
-        sec1: "훈련 자료",
-        link1_title: "MTF 음성 여성화 훈련 동영상 (중국어 원본)",
-        link1_desc: "Bilibili 동영상 모음 · 시범을 보며 따라 하면 더 직관적입니다",
-        link2_title: "MTF 음성 여성화 연습 매뉴얼 (중국어 원본)",
-        link2_desc: "bilibili 아오기 아오이의 발성 원리부터 구체적인 연습까지의 완전한 텍스트 튜토리얼",
-        link3_title: "MTF 음성 여성화 연습 매뉴얼 (중일영한 버전)",
-        link3_desc1: "일본어, 영어, 한국어 번역: 晴れ猫🏳️‍⚧️🍥",
-        link3_desc2: "bilibili 아오기 아오이의 발성 원리부터 구체적인 연습까지의 완전한 텍스트 튜토리얼, 다국어 버전 포함",
-        sec2: "보조 도구",
-        link4_title: "Voice Tools (모바일)",
-        link4_desc: "음높이와 포먼트 실시간 확인 · Android는 Google Play, Apple은 App Store에서 다운로드",
-        link5_title: "Praat (데스크톱)",
-        link5_desc: "전문 음성 분석 소프트웨어 · 공식 웹사이트에서 다운로드",
-        link6_title: "Praat 중국어 수정 버전 (4.5) 설치 프로그램",
-        link6_desc: "서드파티 중국어 버전 · 다운로드 후 압축을 풀고 설치",
-        sec3: "링크",
-        link7_desc: "mtf.wiki · 중국어 트랜스젠더 관련 지식 및 자료",
-        link8_title: "사이트 작성자 소개 · 晴れ猫🏳️‍⚧️🍥",
-        link8_desc: "clipsule.github.io · 작성자 프로필 및 저작권 고지",
-        note_strong: "저작권 및 면책 조항: ",
-        note_content: "이 페이지는 晴れ猫🏳️‍⚧️🍥 님이 정리 및 게시했습니다. 모든 링크는 제3자 사이트를 가리키며, 내용과 업데이트는 각 사이트에서 관리합니다. 목에 통증이나 쉰 목소리가 느껴지면 휴식을 취하고 무리하지 마세요. 목소리 변화에는 '달' 단위의 시간이 걸립니다. 강도보다 꾸준함이 더 중요합니다."
-      }
-    };
-
-    // 切换语言的核心逻辑
-    function setLanguage(lang) {
-      // 1. 更新按钮的高亮状态
-      document.querySelectorAll('.lang-switcher button').forEach(btn => btn.classList.remove('active'));
-      document.getElementById(`btn-${lang}`).classList.add('active');
-
-      // 2. 遍历所有带有 data-i18n 属性的元素，替换文本
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) {
-          // 如果元素是输入框或带 placeholder 的，可以在这里扩展
-          // 当前主要是替换 innerHTML 或 textContent
-          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-            el.placeholder = translations[lang][key];
-          } else {
-            el.textContent = translations[lang][key];
-          }
-        }
-      });
-
-      // 3. 更新 HTML 的 lang 属性
-      document.documentElement.lang = lang;
-
-      // 4. 保存用户选择（下次刷新自动记住）
-      localStorage.setItem('preferred-lang', lang);
+<script>
+  const translations = {
+    zh: {
+      badge: "STAGE GUIDE · 阶段指南",
+      title: "MTF 声音女性化训练资源",
+      meta: "练习手册 · 视频教程 · 辅助工具 · 友情链接",
+      acoustic_monitor: "声学状态 / ACOUSTIC RESONANCE",
+      warm_tag: "练习守则 & 温暖寄语",
+      intro: "这里收录了与声音女性化训练相关的一些常用资料。练习是一件需要耐心的事，不必急着和别人比较——慢慢来，每一段声音都会比昨天更接近你想要的自己。",
+      stage_nav_title: "训练阶段索引 / PHASES",
+      curator_role: "整理与译者 · 维护者",
+      tag_handbooks: "核心教程与示范",
+      tag_tools: "声学监测与训练",
+      tag_community: "社区互助网络",
+      btn_open: "访问教程",
+      btn_read: "在线阅读",
+      btn_get: "获取工具",
+      btn_download: "官方下载",
+      btn_dl: "直接下载",
+      btn_repo: "GitHub",
+      btn_webapp: "在线使用",
+      btn_explore: "访问站点",
+      btn_view: "查看主页",
+      sec1: "训练资料",
+      link1_title: "MTF 声音女性化训练视频教程（原中文版）",
+      link1_desc: "Bilibili 视频合集 · 跟着示范练习更直观",
+      link2_title: "MTF 声音女性化练习手册（原中文版）",
+      link2_desc: "来自 Bilibili あおぎ葵，从发声原理到具体练习的完整文字教程",
+      link3_title: "MTF 声音女性化练习手册（中、日、英、韩语版）",
+      link3_desc1: "日语、英语、韩语 译者：晴れ猫🏳️‍⚧️🍥",
+      link3_desc2: "来自 Bilibili あおぎ葵的完整文字教程，包含多种语言版本",
+      sec2: "辅助工具",
+      link4_title: "Voice Tools（手机端）",
+      link4_desc: "实时查看音高与共振峰 · Android 于 Google Play、Apple 于 App Store 获取",
+      link5_title: "Praat（电脑端）",
+      link5_desc: "专业的语音分析软件 · 官方站点免费下载",
+      link6_title: "Praat 汉化修改版（4.5）安装程序",
+      link6_desc: "第三方汉化版本 · 下载后需自行解压安装",
+      link7_title: "性别声音练习工具 Koenami",
+      link7_desc1: "面向双声类目标、跨性别者或探索者",
+      link7_desc2: "由 まくぽり 制作的开源网页练习工具 · GitHub：transnavi/koenami",
+      sec3: "友情链接",
+      link8_desc: "mtf.wiki · 中文跨性别相关知识与资料",
+      link9_desc: "transnavi.jp · 日文跨性别相关知识与资料",
+      link10_title: "关于本站作者 · 晴れ猫🏳️‍⚧️🍥",
+      link10_desc: "clipsule.github.io · 本站作者的个人简介与版权声明",
+      sec_contributors: "贡献者",
+      visitor_label: "访客",
+      contributor_mkpoli: "代码贡献 / 项目支持",
+      contributor_clipsule: "创作者 / 所有者",
+      note_strong: "版权与声明：",
+      note_content: "本页面由 晴れ猫🏳️‍⚧️🍥 整理发布。所有链接均指向第三方站点，内容与更新由各站点自行维护。练习时请量力而行，感到喉咙疼痛或声音沙哑就停下来休息，不要勉强硬撑。声音的改变以「月」为单位，坚持比强度更重要。",
+      // 阶段副标题
+      phase1: "Phase 1 · Foundation & Video Courses",
+      phase2: "Phase 2 · Audio & Acoustic Tools",
+      phase3: "Phase 3 · Community & Knowledge Wiki",
+      phase4: "Phase 4 · Contributors & Credits",
+      // 指标标签
+      metric_video: "Video Tutorial",
+      metric_demo: "示范演练",
+      metric_bilibili: "Bilibili",
+      metric_theory: "发声原理",
+      metric_text_lib: "文字练习库",
+      metric_multilang: "多语言支持",
+      metric_zh_ja_en_ko: "ZH / JA / EN / KO",
+      metric_pitch: "Pitch · 音高",
+      metric_formant: "Formants · 共振峰",
+      metric_mobile: "iOS / Android",
+      metric_spec: "Spectrogram · 语图",
+      metric_academic: "专业学术分析",
+      metric_desktop: "Desktop",
+      metric_cn_ui: "中文界面",
+      metric_installer: "安装程序包",
+      metric_opensource: "Web Open-Source",
+      metric_explore: "双声类/探索",
+      metric_wiki: "中文百科",
+      metric_guide: "全方位指引",
+      metric_jp_portal: "日本語ポータル",
+      metric_jp_wiki: "Japan Trans Wiki",
+      metric_author: "Author Profile",
+      metric_profile: "个人主页与项目"
+    },
+    en: {
+      badge: "STAGE GUIDE · DASHBOARD",
+      title: "MTF Voice Feminization Resources",
+      meta: "Handbooks · Video Courses · Audio Tools · Community",
+      acoustic_monitor: "ACOUSTIC RESONANCE SPECTRUM",
+      warm_tag: "PRACTICE TIPS & WARM WORDS",
+      intro: "A curated collection of resources for voice feminization practice. Practice takes patience — there is no need to compare yourself to others. Take your time, and every voice will get a little closer to the self you want.",
+      stage_nav_title: "STAGES DIRECTORY",
+      curator_role: "Curator & Translator",
+      tag_handbooks: "Core Tutorials",
+      tag_tools: "Acoustics & Monitoring",
+      tag_community: "Peer & Wiki Links",
+      btn_open: "Watch Course",
+      btn_read: "Read Online",
+      btn_get: "Get App",
+      btn_download: "Official Site",
+      btn_dl: "Download",
+      btn_repo: "GitHub",
+      btn_webapp: "Try Online",
+      btn_explore: "Visit Wiki",
+      btn_view: "View Profile",
+      sec1: "Training Materials",
+      link1_title: "MTF Voice Feminization Video Tutorial (Original Chinese)",
+      link1_desc: "Bilibili video series · Follow along with demonstrations",
+      link2_title: "MTF Voice Feminization Handbook (Original Chinese)",
+      link2_desc: "By bilibili Aogi Aoi — a complete written tutorial from vocal principles to specific exercises",
+      link3_title: "MTF Voice Feminization Handbook (ZH / JA / EN / KO)",
+      link3_desc1: "Japanese, English, Korean translation by 晴れ猫🏳️‍⚧️🍥",
+      link3_desc2: "The same complete handbook by bilibili Aogi Aoi, available in multiple languages",
+      sec2: "Tools & Acoustics",
+      link4_title: "Voice Tools (Mobile)",
+      link4_desc: "Check pitch and formants in real time · Available on Google Play and the App Store",
+      link5_title: "Praat (Desktop)",
+      link5_desc: "Professional speech analysis software · Download from official website",
+      link6_title: "Praat Chinese Mod (4.5) Installer",
+      link6_desc: "Third-party Chinese version · Extract and install after download",
+      link7_title: "Koenami · Gender Voice Practice Tool",
+      link7_desc1: "For people aiming for a two-voice range, transgender individuals, or vocal explorers",
+      link7_desc2: "An open-source web practice tool by まくぽり · GitHub: transnavi/koenami",
+      sec3: "Links & Community",
+      link8_desc: "mtf.wiki · Chinese-language transgender knowledge and resources",
+      link9_desc: "transnavi.jp · Japanese-language transgender knowledge and resources",
+      link10_title: "About the Author · 晴れ猫🏳️‍⚧️🍥",
+      link10_desc: "clipsule.github.io · Author's personal profile and copyright notice",
+      sec_contributors: "Contributors",
+      visitor_label: "Visitors",
+      contributor_mkpoli: "Code Contribution & Support",
+      contributor_clipsule: "Creator & Owner",
+      note_strong: "Copyright & Disclaimer: ",
+      note_content: "This page is compiled and published by 晴れ猫🏳️‍⚧️🍥. All links point to third-party websites; content and updates are maintained by their respective sites. Practice within your limits, rest if you feel throat pain or hoarseness, and don't push too hard. Voice changes take months; consistency matters more than intensity.",
+      phase1: "Phase 1 · Foundation & Video Courses",
+      phase2: "Phase 2 · Audio & Acoustic Tools",
+      phase3: "Phase 3 · Community & Knowledge Wiki",
+      phase4: "Phase 4 · Contributors & Credits",
+      metric_video: "Video Tutorial",
+      metric_demo: "Demo",
+      metric_bilibili: "Bilibili",
+      metric_theory: "Vocal Principles",
+      metric_text_lib: "Text Exercises",
+      metric_multilang: "Multi-language",
+      metric_zh_ja_en_ko: "ZH / JA / EN / KO",
+      metric_pitch: "Pitch",
+      metric_formant: "Formants",
+      metric_mobile: "iOS / Android",
+      metric_spec: "Spectrogram",
+      metric_academic: "Academic Analysis",
+      metric_desktop: "Desktop",
+      metric_cn_ui: "Chinese UI",
+      metric_installer: "Installer Package",
+      metric_opensource: "Web Open-Source",
+      metric_explore: "Two-voice/Explore",
+      metric_wiki: "Chinese Wiki",
+      metric_guide: "Comprehensive Guide",
+      metric_jp_portal: "Japanese Portal",
+      metric_jp_wiki: "Japan Trans Wiki",
+      metric_author: "Author Profile",
+      metric_profile: "Profile & Projects"
+    },
+    ja: {
+      badge: "STAGE GUIDE · ステージガイド",
+      title: "MTF 声の女性化リソース",
+      meta: "練習マニュアル · 動画講座 · 音響ツール · リンク集",
+      acoustic_monitor: "音響共鳴ステータス / RESONANCE",
+      warm_tag: "練習の心得 & 温かいメッセージ",
+      intro: "声の女性化トレーニングに関連する、よく使われる資料をまとめました。練習には忍耐が必要です。他人と比べる必要はありません——ゆっくりで大丈夫、あなたの声は昨日より少しずつ理想の自分に近づいていきます。",
+      stage_nav_title: "トレーニング段階目次",
+      curator_role: "編纂・翻訳者",
+      tag_handbooks: "基本講座・実演",
+      tag_tools: "音響測定・補助",
+      tag_community: "コミュニティ・Wiki",
+      btn_open: "講座を見る",
+      btn_read: "オンライン閲覧",
+      btn_get: "アプリ入手",
+      btn_download: "公式サイト",
+      btn_dl: "ダウンロード",
+      btn_repo: "GitHub",
+      btn_webapp: "オンライン使用",
+      btn_explore: "サイトを見る",
+      btn_view: "プロフィール",
+      sec1: "トレーニング資料",
+      link1_title: "MTF 声の女性化トレーニング動画（オリジナル中国語版）",
+      link1_desc: "Bilibili 動画シリーズ · お手本を見ながら練習すると分かりやすいです",
+      link2_title: "MTF 声の女性化練習マニュアル（オリジナル中国語版）",
+      link2_desc: "bilibili の あおぎ葵 による、発声原理から具体的な練習までの完全なテキストチュートリアル",
+      link3_title: "MTF 声の女性化練習マニュアル（中・日・英・韓語版）",
+      link3_desc1: "日本語・英語・韓国語 翻訳：晴れ猫🏳️‍⚧️🍥",
+      link3_desc2: "bilibili あおぎ葵の完全なテキストチュートリアル、多言語版",
+      sec2: "補助ツール",
+      link4_title: "Voice Tools（モバイル版）",
+      link4_desc: "ピッチとフォルマントをリアルタイムで確認 · Android は Google Play、Apple は App Store から",
+      link5_title: "Praat（デスクトップ版）",
+      link5_desc: "プロ向けの音声分析ソフト · 公式サイトからダウンロード",
+      link6_title: "Praat 中国語化修正版（4.5）インストーラー",
+      link6_desc: "サードパーティの中国語版 · ダウンロード後に解凍してインストール",
+      link7_title: "Koenami · 性別ボイス練習ツール",
+      link7_desc1: "両声類を目指す方、トランスジェンダーの方、または女声・男声を試してみたい方へ",
+      link7_desc2: "まくぽり 制作のオープンソースWeb練習ツール · GitHub: transnavi/koenami",
+      sec3: "リンク",
+      link8_desc: "mtf.wiki · 中国語のトランスジェンダー関連の知識と資料",
+      link9_desc: "transnavi.jp · 日本語のトランスジェンダー関連の知識と資料",
+      link10_title: "このサイトの作者について · 晴れ猫🏳️‍⚧️🍥",
+      link10_desc: "clipsule.github.io · 作者のプロフィールと著作権表示",
+      sec_contributors: "貢献者",
+      visitor_label: "訪問者",
+      contributor_mkpoli: "コード貢献・サポート",
+      contributor_clipsule: "作成者・所有者",
+      note_strong: "著作権と免責事項：",
+      note_content: "このページは 晴れ猫🏳️‍⚧️🍥 によってまとめ・公開されています。すべてのリンクはサードパーティのサイトを指しており、内容と更新は各サイトによって維持されています。無理のない範囲で練習し、喉の痛みや声のかすれを感じたら休憩してください。声の変化には「月」単位の時間がかかります。強度よりも継続が大切です。",
+      phase1: "Phase 1 · 基礎と動画コース",
+      phase2: "Phase 2 · 音響ツール",
+      phase3: "Phase 3 · コミュニティとWiki",
+      phase4: "Phase 4 · 貢献者とクレジット",
+      metric_video: "動画チュートリアル",
+      metric_demo: "実演",
+      metric_bilibili: "Bilibili",
+      metric_theory: "発声原理",
+      metric_text_lib: "テキスト練習",
+      metric_multilang: "多言語対応",
+      metric_zh_ja_en_ko: "ZH / JA / EN / KO",
+      metric_pitch: "ピッチ",
+      metric_formant: "フォルマント",
+      metric_mobile: "iOS / Android",
+      metric_spec: "スペクトログラム",
+      metric_academic: "学術分析",
+      metric_desktop: "デスクトップ",
+      metric_cn_ui: "中国語UI",
+      metric_installer: "インストーラー",
+      metric_opensource: "Webオープンソース",
+      metric_explore: "両声類/探求",
+      metric_wiki: "中国語Wiki",
+      metric_guide: "総合ガイド",
+      metric_jp_portal: "日本語ポータル",
+      metric_jp_wiki: "Japan Trans Wiki",
+      metric_author: "作者プロフィール",
+      metric_profile: "プロフィール・プロジェクト"
+    },
+    ko: {
+      badge: "STAGE GUIDE · 단계 가이드",
+      title: "MTF 음성 여성화 자료 모음",
+      meta: "연습 매뉴얼 · 동영상 튜토리얼 · 음향 도구 · 링크",
+      acoustic_monitor: "음향 공명 스펙트럼 / RESONANCE",
+      warm_tag: "연습 수칙 & 따뜻한 메시지",
+      intro: "음성 여성화 연습과 관련해 자주 쓰이는 자료를 모아두었습니다. 연습에는 인내가 필요합니다. 다른 사람과 비교할 필요는 없어요——천천히, 당신의 목소리는 어제보다 조금씩 원하는 자신에게 가까워질 거예요.",
+      stage_nav_title: "훈련 단계 색인",
+      curator_role: "정리 및 번역자",
+      tag_handbooks: "핵심 튜토리얼 및 시범",
+      tag_tools: "음향 모니터링 및 분석",
+      tag_community: "커뮤니티 및 정보망",
+      btn_open: "튜토리얼 보기",
+      btn_read: "온라인 읽기",
+      btn_get: "도구 다운로드",
+      btn_download: "공식 사이트",
+      btn_dl: "직접 다운로드",
+      btn_repo: "GitHub",
+      btn_webapp: "온라인 사용",
+      btn_explore: "사이트 방문",
+      btn_view: "프로필 보기",
+      sec1: "훈련 자료",
+      link1_title: "MTF 음성 여성화 훈련 영상 (중국어 원본)",
+      link1_desc: "Bilibili 영상 시리즈 · 시범을 보며 따라 하면 더 직관적입니다",
+      link2_title: "MTF 음성 여성화 연습 매뉴얼 (중국어 원본)",
+      link2_desc: "bilibili 아오기 아오이의 발성 원리부터 구체적인 연습까지의 완전한 텍스트 튜토리얼",
+      link3_title: "MTF 음성 여성화 연습 매뉴얼 (중·일·영·한 버전)",
+      link3_desc1: "일본어·영어·한국어 번역: 晴れ猫🏳️‍⚧️🍥",
+      link3_desc2: "bilibili 아오기 아오이의 완전한 텍스트 튜토리얼, 다국어 버전 포함",
+      sec2: "보조 도구",
+      link4_title: "Voice Tools (모바일)",
+      link4_desc: "음높이와 포먼트를 실시간으로 확인 · Android는 Google Play, Apple은 App Store에서 다운로드",
+      link5_title: "Praat (데스크톱)",
+      link5_desc: "전문 음성 분석 소프트웨어 · 공식 웹사이트에서 다운로드",
+      link6_title: "Praat 중국어 수정 버전 (4.5) 설치 프로그램",
+      link6_desc: "서드파티 중국어 버전 · 다운로드 후 압축을 풀고 설치",
+      link7_title: "Koenami · 성별 목소리 연습 도구",
+      link7_desc1: "양성(兩聲) 목표, 트랜스젠더, 또는 탐색자를 위한 도구",
+      link7_desc2: "まくぽり 제작 오픈소스 웹 연습 도구 · GitHub: transnavi/koenami",
+      sec3: "링크",
+      link8_desc: "mtf.wiki · 중국어 트랜스젠더 관련 지식 및 자료",
+      link9_desc: "transnavi.jp · 일본어 트랜스젠더 관련 지식 및 자료",
+      link10_title: "사이트 작성자 소개 · 晴れ猫🏳️‍⚧️🍥",
+      link10_desc: "clipsule.github.io · 작성자 프로필 및 저작권 고지",
+      sec_contributors: "기여자",
+      visitor_label: "방문자",
+      contributor_mkpoli: "코드 기여 및 지원",
+      contributor_clipsule: "제작자 및 소유자",
+      note_strong: "저작권 및 면책 조항: ",
+      note_content: "이 페이지는 晴れ猫🏳️‍⚧️🍥 님이 정리 및 게시했습니다. 모든 링크는 제3자 사이트를 가리키며, 내용과 업데이트는 각 사이트에서 관리합니다. 목에 통증이나 쉰 목소리가 느껴지면 휴식을 취하고 무리하지 마세요. 목소리 변화에는 '달' 단위의 시간이 걸립니다. 강도보다 꾸준함이 더 중요합니다.",
+      phase1: "Phase 1 · 기초 및 동영상 코스",
+      phase2: "Phase 2 · 음향 도구",
+      phase3: "Phase 3 · 커뮤니티 및 위키",
+      phase4: "Phase 4 · 기여자 및 크레딧",
+      metric_video: "동영상 튜토리얼",
+      metric_demo: "시범",
+      metric_bilibili: "Bilibili",
+      metric_theory: "발성 원리",
+      metric_text_lib: "텍스트 연습",
+      metric_multilang: "다국어 지원",
+      metric_zh_ja_en_ko: "ZH / JA / EN / KO",
+      metric_pitch: "음높이",
+      metric_formant: "포먼트",
+      metric_mobile: "iOS / Android",
+      metric_spec: "스펙트로그램",
+      metric_academic: "학술 분석",
+      metric_desktop: "데스크톱",
+      metric_cn_ui: "중국어 UI",
+      metric_installer: "설치 패키지",
+      metric_opensource: "웹 오픈소스",
+      metric_explore: "양성/탐색",
+      metric_wiki: "중국어 위키",
+      metric_guide: "종합 가이드",
+      metric_jp_portal: "일본어 포털",
+      metric_jp_wiki: "Japan Trans Wiki",
+      metric_author: "작성자 프로필",
+      metric_profile: "프로필 및 프로젝트"
     }
+  };
 
-    // 页面加载时，自动检测语言
-    window.addEventListener('DOMContentLoaded', () => {
-      // 优先使用之前保存的偏好
-      const savedLang = localStorage.getItem('preferred-lang');
-      if (savedLang && translations[savedLang]) {
-        setLanguage(savedLang);
-        return;
-      }
+  function setLanguage(lang) {
+    document.querySelectorAll('.lang-switcher button').forEach(btn => btn.classList.remove('active'));
+    const targetBtn = document.getElementById(`btn-${lang}`);
+    if (targetBtn) targetBtn.classList.add('active');
 
-      // 如果没有偏好，根据浏览器语言自动判断
-      const browserLang = navigator.language.toLowerCase();
-      if (browserLang.startsWith('ja')) {
-        setLanguage('ja');
-      } else if (browserLang.startsWith('ko')) {
-        setLanguage('ko');
-      } else if (browserLang.startsWith('en')) {
-        setLanguage('en');
-      } else {
-        setLanguage('zh'); // 默认中文
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang] && translations[lang][key]) {
+        el.textContent = translations[lang][key];
       }
     });
-  </script>
+
+    document.documentElement.lang = lang;
+    localStorage.setItem('preferred-lang', lang);
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    // 语言初始化
+    const savedLang = localStorage.getItem('preferred-lang');
+    if (savedLang && translations[savedLang]) {
+      setLanguage(savedLang);
+    } else {
+      const browserLang = navigator.language.toLowerCase();
+      if (browserLang.startsWith('ja')) setLanguage('ja');
+      else if (browserLang.startsWith('ko')) setLanguage('ko');
+      else if (browserLang.startsWith('en')) setLanguage('en');
+      else setLanguage('zh');
+    }
+
+    // 返回顶部按钮逻辑
+    const backToTopBtn = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
 </body>
 </html>
